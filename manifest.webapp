@@ -13,12 +13,6 @@
       "addon.js"
     ]
   }],
-  "icons": {
-    "30": "/icons/icon30.png",
-    "60": "/icons/icon60.png",
-    "90": "/icons/icon90.png",
-    "120": "/icons/icon120.png"
-  },
   "permissions": {
   }
 }
