@@ -2,21 +2,22 @@
   // If injecting into an app that was already running at the time
   // the app was enabled, simply initialize it.
   if (document.documentElement) {
-    updateElement();
+    initialize();
   }
 
   // Otherwise, we need to wait for the DOM to be ready before
   // starting initialization since add-ons are usually (always?)
   // injected *before* `document.documentElement` is defined.
   else {
-    window.addEventListener('DOMContentLoaded', updateElement);
+    window.addEventListener('DOMContentLoaded', initialize);
   }
 
   var statusBarEl;
   var containerEl;
   var chargingPercentage = 0;
 
-  function updateElement() {
+  function initialize() {
+    
     // Get the status bar bar
     statusBarEl = document.getElementById('statusbar-maximized');
 
@@ -26,14 +27,6 @@
       statusBarEl.removeChild(containerEl);
     }
     
-    navigator.getBattery().then(function(battery) {
-      chargingPercentage = battery.level * 100 + '%';
-
-      battery.addEventListener('levelchange', function() {
-        updateElement();
-      });
-    });
-
     // Build the battery percentage element
     containerEl = document.createElement('div');
     containerEl.setAttribute('id', 'statusbar-battery');
@@ -41,10 +34,14 @@
     containerEl.style.fontSize = '1.5rem';
     containerEl.style.fontWeight = '400';
     containerEl.style.lineHeight = '1.6rem';
-    containerEl.textContent = chargingPercentage;
+    containerEl.textContent = '---';
     
-    if (!statusBarEl.contains(containerEl)) {
-      statusBarEl.appendChild(containerEl);
-    }
+    statusBarEl.appendChild(containerEl);
+    
+    var battery = window.navigator.battery;
+   
+    battery.addEventListener('levelchange', function() {
+      containerEl.textContent = battery.level * 100 + '%';
+    });
   }
 }());
