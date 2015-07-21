@@ -2,8 +2,8 @@
   "name": "Status Bar - Battery",
   "description": "Adds the battery percentage to the status bar",
   "developer": {
-    "name": "Michael Kohler",
-    "url": "http://michaelkohler.info"
+    "name": "Michael Kohler & André Fiedler",
+    "url": "http://mozilla.de"
   },
   "role": "addon",
   "type": "certified",
