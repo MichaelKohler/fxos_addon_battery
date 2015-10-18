@@ -1,0 +1,11 @@
+{
+  "name": "Status Bar Battery Percentage",
+  "description": "Adds the battery status percentage to the status bar as an additional item.",
+  "developer": {
+    "name": "Michael Kohler & André Fiedler"
+  },
+  "package_path": "package.zip",
+  "icons": {
+    "128": "128.png"
+  }
+}

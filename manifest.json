@@ -1,0 +1,16 @@
+{
+  "manifest_version": 1,
+  "version": "1.0",
+  "name": "Status Bar Battery Percentage",
+  "description": "Adds the battery status percentage to the status bar as an additional item.",
+  "author": "Michael Kohler & André Fiedler",
+  "package_path": "package.zip",
+  "content_scripts": [{
+    "matches": "app://system.gaiamobile.org/index.html",
+    "css": [],
+    "js": ["index.js"]
+  }],
+  "icons": {
+    "128": "128.png"
+  }
+}
