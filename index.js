@@ -12,7 +12,7 @@
 
   function initialize() {
     var battery = window.navigator.battery;
-    var statusBarEl = document.getElementById('statusbar-maximized');
+    var statusBarEl = document.querySelector('.statusbar');
     containerEl = document.getElementById('statusbar-batterypercentage');
 
     if (statusBarEl.contains(containerEl)) {
@@ -22,7 +22,7 @@
     // Build the battery percentage element
     containerEl = document.createElement('div');
     containerEl.setAttribute('id', 'statusbar-batterypercentage');
-    containerEl.style.order = '-3';
+    containerEl.style.order = '2';
     containerEl.style.fontSize = '1.5rem';
     containerEl.style.fontWeight = '400';
     containerEl.style.lineHeight = '1.6rem';
