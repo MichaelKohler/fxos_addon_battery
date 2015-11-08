@@ -1,7 +1,4 @@
 (function () {
-  // If injecting into an app that was already running at the time
-  // the app was enabled, simply initialize it. Otherwise initialize it after it
-  // is loaded.
   if (document.documentElement) {
     initialize();
   } else {
@@ -11,27 +8,39 @@
   var containerEl;
 
   function initialize() {
-    var battery = window.navigator.battery;
     var statusBarEl = document.querySelector('.statusbar');
-    containerEl = document.getElementById('statusbar-batterypercentage');
+    containerEl = document.querySelector('#statusbar-batterypercentage');
 
     if (statusBarEl.contains(containerEl)) {
       statusBarEl.removeChild(containerEl);
     }
 
     // Build the battery percentage element
-    containerEl = document.createElement('div');
+    statusBarEl.appendChild(createPercentageElement());
+
+    attachListeners();
+  }
+
+  function getBatteryLevel() {
+    return Math.floor(window.navigator.battery.level * 100) + '%';
+  }
+
+  function attachListeners() {
+    battery.addEventListener('levelchange', function() {
+      containerEl.textContent = getBatteryLevel();
+    });
+  }
+
+  function createPercentageElement() {
+    var containerEl = document.createElement('div');
+
     containerEl.setAttribute('id', 'statusbar-batterypercentage');
     containerEl.style.order = '2';
     containerEl.style.fontSize = '1.4rem';
     containerEl.style.fontWeight = '400';
     containerEl.style.lineHeight = '1.6rem';
-    containerEl.textContent = Math.floor(battery.level * 100) + '%';
+    containerEl.textContent = getBatteryLevel();
 
-    statusBarEl.appendChild(containerEl);
-
-    battery.addEventListener('levelchange', function() {
-      containerEl.textContent = Math.floor(battery.level * 100) + '%';
-    });
+    return containerEl;
   }
 }());
